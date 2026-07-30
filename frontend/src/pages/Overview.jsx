@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Overview = () => {
   const [kpiData, setKpiData] = useState(null);
   const [lcrData, setLcrData] = useState(null);
+  const [totalEcl, setTotalEcl] = useState(null);
 
   useEffect(() => {
     fetch('/api/credit/kpis')
@@ -12,10 +13,17 @@ const Overview = () => {
     fetch('/api/alm/lcr')
       .then(res => res.json())
       .then(data => setLcrData(data[0]));
+      
+    fetch('/api/credit/ecl-summary')
+      .then(res => res.json())
+      .then(data => {
+        const sumEcl = data.reduce((acc, row) => acc + (row.approx_ECL || 0), 0);
+        setTotalEcl(sumEcl);
+      });
   }, []);
 
   const formatCurrency = (val) => {
-    if (!val) return '$0';
+    if (val === undefined || val === null) return '$0';
     return '$' + (val / 1e9).toFixed(2) + 'B';
   };
 
@@ -29,13 +37,13 @@ const Overview = () => {
       <div className="grid-cards">
         <div className="glass-panel">
           <div className="kpi-title">Total Credit Exposure</div>
-          <div className="kpi-value">{kpiData ? formatCurrency(kpiData.Total_Exposure) : '...'}</div>
+          <div className="kpi-value">{kpiData ? formatCurrency(kpiData.total_exposure) : '...'}</div>
           <div className="kpi-trend trend-up">Current Portfolio</div>
         </div>
         
         <div className="glass-panel">
           <div className="kpi-title">Overall NPA Ratio</div>
-          <div className="kpi-value">{kpiData ? (kpiData.Avg_NPA_Ratio * 100).toFixed(2) + '%' : '...'}</div>
+          <div className="kpi-value">{kpiData ? (kpiData.npa_percentage).toFixed(2) + '%' : '...'}</div>
           <div className="kpi-trend trend-down">Needs Attention</div>
         </div>
 
@@ -49,7 +57,7 @@ const Overview = () => {
         
         <div className="glass-panel">
           <div className="kpi-title">Total Expected Credit Loss</div>
-          <div className="kpi-value">{kpiData ? formatCurrency(kpiData.Total_Expected_Loss) : '...'}</div>
+          <div className="kpi-value">{totalEcl !== null ? formatCurrency(totalEcl) : '...'}</div>
           <div className="kpi-trend trend-down">ECL Provision</div>
         </div>
       </div>

@@ -1,0 +1,11 @@
+branch_id,branch_name,city,state,region
+B001,Mumbai Main,Mumbai,Maharashtra,West
+B002,Pune Camp,Pune,Maharashtra,West
+B003,Delhi Connaught Place,New Delhi,Delhi,North
+B004,Bangalore MG Road,Bangalore,Karnataka,South
+B005,Chennai Anna Salai,Chennai,Tamil Nadu,South
+B006,Ahmedabad SG Highway,Ahmedabad,Gujarat,West
+B007,Kolkata Park Street,Kolkata,West Bengal,East
+B008,Hyderabad Banjara Hills,Hyderabad,Telangana,South
+B009,Lucknow Hazratganj,Lucknow,Uttar Pradesh,North
+B010,Jaipur MI Road,Jaipur,Rajasthan,North

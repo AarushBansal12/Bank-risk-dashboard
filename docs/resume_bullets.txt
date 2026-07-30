@@ -1,0 +1,5 @@
+- Built an end-to-end credit risk analytics dashboard on a simulated ~20,000-loan Indian bank portfolio.
+- Designed robust SQL data models and views to compute Gross/Net NPA, sectoral and geographic exposures, and Provision Coverage Ratio (PCR).
+- Implemented Expected Credit Loss (ECL) logic compliant with Ind AS 109 / IFRS 9 standards, staging assets based on Days Past Due (DPD) and RBI SMA classifications.
+- Created an interactive 7-page Tableau dashboard used to identify high-risk borrower segments, credit rating migrations, and concentration risks, accelerating portfolio monitoring capabilities.
+- Engineered a synthetic data generation pipeline in Python (pandas, Faker) reflecting realistic macroeconomic risk patterns and regional skews to test dashboard resilience.
